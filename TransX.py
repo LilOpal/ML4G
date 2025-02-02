@@ -89,6 +89,6 @@ class TransH(nn.Module):
         h_emb = self.proj(h_emb, normal_emb)
         t_emb = self.proj(t_emb, normal_emb)
         if self.C >= 0 and train:
-            return pt.norm(h_emb - t_emb + r_emb, p = res_p, dim=-1) + self.C * (nn.functional.relu((normal_emb * r_emb).sum(dim = 1) - 1e-6).sum() + self.scale_constrain(h_emb, t_emb))
+            return pt.norm(h_emb - t_emb + r_emb, p = res_p, dim=-1) + self.C * (nn.functional.relu((normal_emb * r_emb).sum(dim = 1) / pt.norm(r_emb, p=2, dim=1) - 1e-6).sum() + self.scale_constrain(h_emb, t_emb))
         else:
             return pt.norm(h_emb - t_emb + r_emb, p = res_p, dim=-1)
