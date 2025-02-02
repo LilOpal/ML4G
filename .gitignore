@@ -1,5 +1,8 @@
 *.txt
 *.zip
+tmp*
 /datasets_knowledge_embedding/
 /FB15K-237.2/
 /FB15K-237.2/Release/
+/datasets_knowledge_embedding/other/nations/2hrt.py
+*.pt
